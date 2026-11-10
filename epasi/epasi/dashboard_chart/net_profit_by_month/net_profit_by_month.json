@@ -1,0 +1,32 @@
+{
+ "chart_name": "Net Profit by Month",
+ "chart_type": "Custom",
+ "creation": "2026-11-10 21:00:00.000000",
+ "custom_options": "{\"fieldtype\": \"Currency\", \"axisOptions\": {\"xIsSeries\": 1}, \"colors\": [\"#B8860B\"]}",
+ "docstatus": 0,
+ "doctype": "Dashboard Chart",
+ "document_type": "Loan",
+ "filters_json": "{}",
+ "idx": 0,
+ "is_public": 1,
+ "is_standard": 1,
+ "modified": "2026-11-10 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Epasi",
+ "name": "Net Profit by Month",
+ "number_of_groups": 0,
+ "owner": "Administrator",
+ "roles": [
+  {
+   "role": "Loan Manager"
+  },
+  {
+   "role": "System Manager"
+  }
+ ],
+ "source": "Epasi Chart",
+ "timeseries": 0,
+ "type": "Line",
+ "use_report_chart": 0,
+ "y_axis": []
+}

@@ -53,3 +53,7 @@ jspm_packages/
 
 # Aider AI Chat
 .aider*
+
+epasi/public/frontend
+epasi/www/epasi.html
+epasi/public/node_modules
