@@ -35,7 +35,18 @@ app_license = "mit"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/epasi/css/epasi.css"
-# app_include_js = "/assets/epasi/js/epasi.js"
+app_include_js = "/assets/epasi/js/epasi.js"
+app_include_css = "/assets/epasi/css/epasi.css"
+
+add_to_apps_screen = [
+	{
+		"name": "epasi",
+		"logo": "/assets/epasi/images/epasi-icon.png",
+		"title": "Epasi",
+		"route": "/app/epasi",
+		"has_permission": "epasi.api.dashboard.has_app_permission",
+	}
+]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/epasi/css/epasi.css"
@@ -96,7 +107,7 @@ app_license = "mit"
 # ------------
 
 # before_install = "epasi.install.before_install"
-# after_install = "epasi.install.after_install"
+after_install = "epasi.setup.install.after_install"
 
 # Uninstallation
 # ------------
@@ -169,6 +180,8 @@ app_license = "mit"
 
 # Scheduled Tasks
 # ---------------
+
+scheduler_events = {"daily": ["epasi.epasi.doctype.loan.loan.mark_overdue_loans"]}
 
 # scheduler_events = {
 # 	"all": [
@@ -277,3 +290,11 @@ app_license = "mit"
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
 
+
+fixtures = [
+	{"dt": "Role", "filters": [["name", "=", "Loan Manager"]]},
+	{"dt": "Custom HTML Block", "filters": [["name", "=", "Epasi Today"]]},
+]
+
+website_redirects = [{"source": "/", "target": "/epasi", "redirect_http_status": 302}]
+website_route_rules = [{"from_route": "/epasi/<path:app_path>", "to_route": "epasi"}]

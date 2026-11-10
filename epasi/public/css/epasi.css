@@ -1,0 +1,10 @@
+@media (max-width: 575px) {
+	body[data-route="Workspaces/Epasi"] .ce-block:has(.number-widget-box) {
+		flex: 0 0 50%;
+		max-width: 50%;
+		padding-inline: 4px;
+	}
+	body[data-route="Workspaces/Epasi"] .number-widget-box .widget-head {
+		white-space: normal;
+	}
+}

@@ -1,0 +1,171 @@
+{
+ "actions": [],
+ "autoname": "format:COL-{#####}",
+ "creation": "2026-11-10 16:00:00.000000",
+ "custom": 0,
+ "doctype": "DocType",
+ "editable_grid": 0,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_owner",
+  "borrower",
+  "borrower_name",
+  "column_break_owner",
+  "loan",
+  "status",
+  "section_break_item",
+  "description",
+  "column_break_item",
+  "estimated_value",
+  "assessed_value",
+  "section_break_sale",
+  "sale_date",
+  "column_break_sale",
+  "sale_amount",
+  "section_break_photos",
+  "photos_html"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_owner",
+   "fieldtype": "Section Break",
+   "label": "Owner"
+  },
+  {
+   "fieldname": "borrower",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Borrower",
+   "options": "Borrower",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "borrower.full_name",
+   "fieldname": "borrower_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Borrower Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_owner",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "loan",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Loan",
+   "options": "Loan"
+  },
+  {
+   "default": "With Borrower",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "With Borrower\nHeld\nReturned\nForfeited\nSold",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_item",
+   "fieldtype": "Section Break",
+   "label": "Item"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_item",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Value given by the applicant",
+   "fieldname": "estimated_value",
+   "fieldtype": "Currency",
+   "label": "Estimated Value"
+  },
+  {
+   "description": "Value set by the loan manager",
+   "fieldname": "assessed_value",
+   "fieldtype": "Currency",
+   "label": "Assessed Value"
+  },
+  {
+   "fieldname": "section_break_sale",
+   "fieldtype": "Section Break",
+   "label": "Sale",
+   "depends_on": "eval:doc.status == 'Sold'"
+  },
+  {
+   "fieldname": "sale_date",
+   "fieldtype": "Date",
+   "label": "Sale Date",
+   "mandatory_depends_on": "eval:doc.status == 'Sold'"
+  },
+  {
+   "fieldname": "column_break_sale",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sale_amount",
+   "fieldtype": "Currency",
+   "label": "Sale Amount",
+   "mandatory_depends_on": "eval:doc.status == 'Sold'"
+  },
+  {
+   "fieldname": "section_break_photos",
+   "fieldtype": "Section Break",
+   "label": "Photos"
+  },
+  {
+   "fieldname": "photos_html",
+   "fieldtype": "HTML",
+   "label": "Photos"
+  }
+ ],
+ "istable": 0,
+ "links": [],
+ "modified": "2026-11-10 18:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Epasi",
+ "name": "Collateral",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Loan Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "description",
+ "track_changes": 1
+}

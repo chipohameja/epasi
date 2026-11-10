@@ -1,0 +1,19 @@
+[
+ {
+  "doctype": "Custom HTML Block",
+  "name": "Epasi Today",
+  "html": "<div class=\"epasi-today\"><div class=\"muted\">Loading today's summary\u2026</div></div>",
+  "script": "const container = root_element.querySelector(\".epasi-today\");\nconst money = (value) => format_currency(value || 0);\nconst escape = (value) => frappe.utils.escape_html(value || \"\");\n\nfunction render_section(section) {\n\tconst rows = section.rows\n\t\t.map(\n\t\t\t(row) => `<li><a href=\"/app/${frappe.router.slug(row.document_type)}/${row.document}\">\n\t\t\t\t${escape(row.party)} <small>${escape(row.document)}</small></a><span>${money(row.amount)}</span></li>`\n\t\t)\n\t\t.join(\"\");\n\treturn `<section>\n\t\t<header><b>${__(section.label)} (${section.count})</b><span>${money(section.total)}</span></header>\n\t\t<ul>${rows || `<li class=\"muted\">${__(\"None\")}</li>`}</ul>\n\t</section>`;\n}\n\nfunction render_month(month) {\n\tconst labels = { lent: __(\"Lent\"), collected: __(\"Collected\"), net_profit: __(\"Net Profit\") };\n\tconst rows = Object.entries(labels)\n\t\t.map(([key, label]) => {\n\t\t\tconst [current, previous] = month[key];\n\t\t\tconst change = previous ? Math.round(((current - previous) / Math.abs(previous)) * 100) : null;\n\t\t\tconst badge = change === null ? \"\" : `<em class=\"${change >= 0 ? \"up\" : \"down\"}\">${change >= 0 ? \"+\" : \"\"}${change}%</em>`;\n\t\t\treturn `<li>${label}<span>${money(current)} ${badge}</span></li>`;\n\t\t})\n\t\t.join(\"\");\n\treturn `<section><header><b>${__(\"This month vs last month\")}</b></header><ul>${rows}</ul></section>`;\n}\n\nfrappe.call(\"epasi.api.dashboard.get_today_summary\").then(({ message }) => {\n\tcontainer.innerHTML = `<h4>${__(\"Today\")}, ${frappe.datetime.str_to_user(message.date)}</h4>\n\t\t<div class=\"grid\">${message.sections.map(render_section).join(\"\")}${render_month(message.month)}</div>`;\n});\n",
+  "style": ".epasi-today { padding: 16px; border: 1px solid var(--border-color); border-radius: var(--border-radius-lg, 12px); background: var(--card-bg); color: var(--text-color); font-size: var(--text-base, 14px); }\n.epasi-today h4 { margin: 0 0 12px; font-size: var(--text-lg, 16px); }\n.epasi-today .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }\n.epasi-today section { padding: 12px; border-radius: 8px; background: var(--subtle-fg, var(--control-bg)); }\n.epasi-today header, .epasi-today li { display: flex; justify-content: space-between; gap: 8px; }\n.epasi-today ul { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 4px; color: var(--text-muted); }\n.epasi-today a { color: var(--text-color); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }\n.epasi-today small { color: var(--text-muted); }\n.epasi-today li span { white-space: nowrap; }\n.epasi-today .muted { color: var(--text-muted); }\n.epasi-today em { font-style: normal; font-size: 12px; }\n.epasi-today .up { color: var(--green-600, green); }\n.epasi-today .down { color: var(--red-600, red); }\n",
+  "private": 0,
+  "roles": [
+   {
+    "role": "Loan Manager"
+   },
+   {
+    "role": "System Manager"
+   }
+  ],
+  "modified": "2026-11-10 22:00:00.000000"
+ }
+]

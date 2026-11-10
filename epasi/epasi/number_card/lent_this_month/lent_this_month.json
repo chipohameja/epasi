@@ -1,0 +1,20 @@
+{
+ "creation": "2026-11-10 21:00:00.000000",
+ "docstatus": 0,
+ "doctype": "Number Card",
+ "document_type": "Loan",
+ "filters_json": "[]",
+ "idx": 0,
+ "is_public": 1,
+ "is_standard": 1,
+ "label": "Lent This Month",
+ "method": "epasi.api.dashboard.get_lent_this_month",
+ "modified": "2026-11-10 21:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Epasi",
+ "name": "Lent This Month",
+ "owner": "Administrator",
+ "show_percentage_stats": 0,
+ "stats_time_interval": "Monthly",
+ "type": "Custom"
+}

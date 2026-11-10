@@ -1,0 +1,142 @@
+{
+ "actions": [],
+ "autoname": "field:whatsapp_number",
+ "creation": "2026-11-10 12:00:00.000000",
+ "custom": 0,
+ "doctype": "DocType",
+ "editable_grid": 0,
+ "engine": "InnoDB",
+ "field_order": [
+  "full_name",
+  "column_break_contact",
+  "whatsapp_number",
+  "section_break_identity",
+  "nrc_number",
+  "column_break_identity",
+  "address",
+  "section_break_loans",
+  "total_borrowed",
+  "column_break_loans",
+  "total_outstanding"
+ ],
+ "fields": [
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Full Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_contact",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Digits only, with country code. Example: 260972616440",
+   "fieldname": "whatsapp_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "WhatsApp Number",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "section_break_identity",
+   "fieldtype": "Section Break",
+   "label": "Identity"
+  },
+  {
+   "fieldname": "nrc_number",
+   "fieldtype": "Data",
+   "in_standard_filter": 1,
+   "label": "NRC Number"
+  },
+  {
+   "fieldname": "column_break_identity",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  },
+  {
+   "fieldname": "section_break_loans",
+   "fieldtype": "Section Break",
+   "label": "Loans"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_borrowed",
+   "fieldtype": "Currency",
+   "label": "Total Borrowed",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_loans",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_outstanding",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Outstanding",
+   "no_copy": 1,
+   "read_only": 1
+  }
+ ],
+ "istable": 0,
+ "links": [
+  {
+   "link_doctype": "Loan",
+   "link_fieldname": "borrower"
+  },
+  {
+   "link_doctype": "Loan Application",
+   "link_fieldname": "borrower"
+  }
+ ],
+ "modified": "2026-11-10 18:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Epasi",
+ "name": "Borrower",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Loan Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "full_name,whatsapp_number",
+ "show_title_field_in_link": 1,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "full_name",
+ "track_changes": 1
+}
