@@ -1,10 +1,8 @@
 {
  "actions": [],
  "autoname": "format:APP-{#####}",
- "creation": "2026-11-10 12:00:00.000000",
- "custom": 0,
+ "creation": "2026-11-10 12:00:00",
  "doctype": "DocType",
- "editable_grid": 0,
  "engine": "InnoDB",
  "field_order": [
   "section_break_applicant",
@@ -13,6 +11,7 @@
   "whatsapp_number",
   "column_break_applicant",
   "status",
+  "sales_agent",
   "section_break_loan",
   "loan_plan",
   "amount",
@@ -67,7 +66,15 @@
    "in_standard_filter": 1,
    "label": "Status",
    "options": "Pending\nContacted\nApproved\nRejected",
-   "reqd": 1
+   "reqd": 1,
+   "permlevel": 1
+  },
+  {
+   "fieldname": "sales_agent",
+   "fieldtype": "Link",
+   "label": "Sales Agent",
+   "options": "Sales Agent",
+   "permlevel": 1
   },
   {
    "fieldname": "section_break_loan",
@@ -137,18 +144,17 @@
    "label": "Photos"
   }
  ],
- "istable": 0,
  "links": [
   {
    "link_doctype": "Loan",
    "link_fieldname": "loan_application"
   }
  ],
- "modified": "2026-11-10 16:00:00.000000",
+ "modified": "2026-11-11 10:00:00.000000",
  "modified_by": "Administrator",
  "module": "Epasi",
  "name": "Loan Application",
- "naming_rule": "Expression",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -174,8 +180,34 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "role": "Loan Officer",
+   "read": 1,
+   "create": 1,
+   "write": 1,
+   "report": 1,
+   "print": 1
+  },
+  {
+   "role": "Loan Manager",
+   "permlevel": 1,
+   "read": 1,
+   "write": 1
+  },
+  {
+   "role": "System Manager",
+   "permlevel": 1,
+   "read": 1,
+   "write": 1
+  },
+  {
+   "role": "Loan Officer",
+   "permlevel": 1,
+   "read": 1
   }
  ],
+ "row_format": "Dynamic",
  "show_title_field_in_link": 1,
  "sort_field": "creation",
  "sort_order": "DESC",

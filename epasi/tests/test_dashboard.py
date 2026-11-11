@@ -3,12 +3,14 @@ from frappe.tests import IntegrationTestCase
 from frappe.utils import add_days, today
 
 from epasi.api import dashboard
+from epasi.epasi.doctype.commission.test_commission import make_agent_loan, repay_in_full
 from epasi.tests.utils import make_application, make_expense, make_loan, make_repayment
 
 
 def card_values() -> dict:
 	cards = [
 		"get_pending_applications",
+		"get_reviews_awaiting_approval",
 		"get_loans_due_today",
 		"get_overdue_loans",
 		"get_overdue_amount",
@@ -38,6 +40,15 @@ class TestDashboardCards(IntegrationTestCase):
 		self.assertEqual(change["get_collected_this_month"], 300)
 		self.assertEqual(change["get_net_profit_this_month"], 270 - 50)
 
+	def test_commission_cards(self):
+		loan = make_agent_loan()
+		repay_in_full(loan)
+		unpaid_before = dashboard.get_unpaid_commissions()["value"]
+		paid_before = dashboard.get_commission_paid_this_month()["value"]
+		frappe.get_doc("Commission", {"loan": loan.name}).mark_paid()
+		self.assertEqual(dashboard.get_unpaid_commissions()["value"], unpaid_before - 720)
+		self.assertEqual(dashboard.get_commission_paid_this_month()["value"], paid_before + 720)
+
 	def test_loan_due_today(self):
 		before = dashboard.get_loans_due_today()["value"]
 		make_loan(disbursement_date=add_days(today(), -14)).submit()
@@ -59,7 +70,9 @@ class TestDashboardCharts(IntegrationTestCase):
 		make_repayment(loan.name, 100)
 		after = dashboard.get_chart("Lent vs Collected")
 		self.assertEqual(len(after["labels"]), 12)
-		lent, collected = (after["datasets"][i]["values"][-1] - before["datasets"][i]["values"][-1] for i in (0, 1))
+		lent, collected = (
+			after["datasets"][i]["values"][-1] - before["datasets"][i]["values"][-1] for i in (0, 1)
+		)
 		self.assertEqual((lent, collected), (1000, 100))
 
 	def test_net_profit_by_month_ends_with_this_month(self):
@@ -71,12 +84,14 @@ class TestDashboardCharts(IntegrationTestCase):
 	def test_outstanding_by_status_and_loans_by_plan(self):
 		before = dashboard.get_chart("Outstanding by Status")["datasets"][0]["values"]
 		plans = dashboard.get_chart("Loans by Plan")
-		plan_count = dict(zip(plans["labels"], plans["datasets"][0]["values"])).get("1 Month", 0)
+		plan_count = dict(zip(plans["labels"], plans["datasets"][0]["values"], strict=True)).get("1 Month", 0)
 		make_loan("1 Month", disbursement_date=add_days(today(), -40)).submit()
 		after = dashboard.get_chart("Outstanding by Status")["datasets"][0]["values"]
 		self.assertEqual(after[1] - before[1], 1400)
 		plans = dashboard.get_chart("Loans by Plan")
-		self.assertEqual(dict(zip(plans["labels"], plans["datasets"][0]["values"]))["1 Month"], plan_count + 1)
+		self.assertEqual(
+			dict(zip(plans["labels"], plans["datasets"][0]["values"], strict=True))["1 Month"], plan_count + 1
+		)
 
 	def test_unknown_chart_is_rejected(self):
 		self.assertRaises(frappe.ValidationError, dashboard.get_chart, "Nope")

@@ -7,7 +7,8 @@ frappe.ui.form.on("Loan Application", {
 });
 
 function add_create_loan_button(frm) {
-	if (frm.doc.status !== "Approved" || frm.is_dirty()) return;
+	if (frm.doc.status !== "Approved" || frm.is_dirty() || !frappe.model.can_create("Loan"))
+		return;
 	frm.add_custom_button(__("Create Loan"), () => {
 		frm.call("create_loan").then(({ message }) => frappe.set_route("Form", "Loan", message));
 	}).addClass("btn-primary");

@@ -18,7 +18,7 @@
    "label": "Loans by Plan"
   }
  ],
- "content": "[{\"id\": \"epasi00000\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Needs action today</b></span>\", \"col\": 12}}, {\"id\": \"epasi00001\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Pending Applications\", \"col\": 3}}, {\"id\": \"epasi00002\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Loans Due Today\", \"col\": 3}}, {\"id\": \"epasi00003\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Overdue Loans\", \"col\": 3}}, {\"id\": \"epasi00004\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Overdue Amount\", \"col\": 3}}, {\"id\": \"epasi00005\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Money at a glance</b></span>\", \"col\": 12}}, {\"id\": \"epasi00006\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Total Outstanding\", \"col\": 3}}, {\"id\": \"epasi00007\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Lent This Month\", \"col\": 3}}, {\"id\": \"epasi00008\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Collected This Month\", \"col\": 3}}, {\"id\": \"epasi00009\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Net Profit This Month\", \"col\": 3}}, {\"id\": \"epasi00010\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Trends</b></span>\", \"col\": 12}}, {\"id\": \"epasi00011\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Lent vs Collected\", \"col\": 6}}, {\"id\": \"epasi00012\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Net Profit by Month\", \"col\": 6}}, {\"id\": \"epasi00013\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Outstanding by Status\", \"col\": 6}}, {\"id\": \"epasi00014\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Loans by Plan\", \"col\": 6}}, {\"id\": \"epasi00015\", \"type\": \"custom_block\", \"data\": {\"custom_block_name\": \"Epasi Today\", \"col\": 12}}, {\"id\": \"epasi00016\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Lists</b></span>\", \"col\": 12}}, {\"id\": \"epasi00017\", \"type\": \"quick_list\", \"data\": {\"quick_list_name\": \"Pending Applications\", \"col\": 6}}, {\"id\": \"epasi00018\", \"type\": \"quick_list\", \"data\": {\"quick_list_name\": \"Due in 7 Days\", \"col\": 6}}, {\"id\": \"epasi00019\", \"type\": \"quick_list\", \"data\": {\"quick_list_name\": \"Overdue Loans\", \"col\": 6}}, {\"id\": \"epasi00020\", \"type\": \"quick_list\", \"data\": {\"quick_list_name\": \"Latest Repayments\", \"col\": 6}}, {\"id\": \"epasi00021\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Shortcuts</b></span>\", \"col\": 12}}, {\"id\": \"epasi00022\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"New Application\", \"col\": 3}}, {\"id\": \"epasi00023\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"New Repayment\", \"col\": 3}}, {\"id\": \"epasi00024\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"New Expense\", \"col\": 3}}, {\"id\": \"epasi00025\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Loan Application\", \"col\": 3}}, {\"id\": \"epasi00026\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Loan\", \"col\": 3}}, {\"id\": \"epasi00027\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Borrower\", \"col\": 3}}, {\"id\": \"epasi00028\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Collateral\", \"col\": 3}}, {\"id\": \"epasi00029\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Expense\", \"col\": 3}}, {\"id\": \"epasi00030\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Outstanding Loans\", \"col\": 3}}, {\"id\": \"epasi00031\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Profit Summary\", \"col\": 3}}, {\"id\": \"epasi00032\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Daily Operations\", \"col\": 3}}]",
+ "content": "[{\"id\": \"epasi00000\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Needs action today</b></span>\", \"col\": 12}}, {\"id\": \"epasi00001\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Pending Applications\", \"col\": 3}}, {\"id\": \"epasi00002\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Loans Due Today\", \"col\": 3}}, {\"id\": \"epasi00003\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Overdue Loans\", \"col\": 3}}, {\"id\": \"epasi00004\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Overdue Amount\", \"col\": 3}}, {\"id\": \"epasi00038\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Reviews Awaiting Approval\", \"col\": 3}}, {\"id\": \"epasi00005\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Money at a glance</b></span>\", \"col\": 12}}, {\"id\": \"epasi00006\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Total Outstanding\", \"col\": 4}}, {\"id\": \"epasi00007\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Lent This Month\", \"col\": 4}}, {\"id\": \"epasi00008\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Collected This Month\", \"col\": 4}}, {\"id\": \"epasi00009\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Net Profit This Month\", \"col\": 4}}, {\"id\": \"epasi00033\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Unpaid Commissions\", \"col\": 4}}, {\"id\": \"epasi00037\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Commission Paid This Month\", \"col\": 4}}, {\"id\": \"epasi00010\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Trends</b></span>\", \"col\": 12}}, {\"id\": \"epasi00011\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Lent vs Collected\", \"col\": 6}}, {\"id\": \"epasi00012\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Net Profit by Month\", \"col\": 6}}, {\"id\": \"epasi00013\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Outstanding by Status\", \"col\": 6}}, {\"id\": \"epasi00014\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Loans by Plan\", \"col\": 6}}, {\"id\": \"epasi00015\", \"type\": \"custom_block\", \"data\": {\"custom_block_name\": \"Epasi Today\", \"col\": 12}}, {\"id\": \"epasi00016\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Lists</b></span>\", \"col\": 12}}, {\"id\": \"epasi00017\", \"type\": \"quick_list\", \"data\": {\"quick_list_name\": \"Pending Applications\", \"col\": 6}}, {\"id\": \"epasi00018\", \"type\": \"quick_list\", \"data\": {\"quick_list_name\": \"Due in 7 Days\", \"col\": 6}}, {\"id\": \"epasi00019\", \"type\": \"quick_list\", \"data\": {\"quick_list_name\": \"Overdue Loans\", \"col\": 6}}, {\"id\": \"epasi00020\", \"type\": \"quick_list\", \"data\": {\"quick_list_name\": \"Latest Repayments\", \"col\": 6}}, {\"id\": \"epasi00021\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Shortcuts</b></span>\", \"col\": 12}}, {\"id\": \"epasi00022\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"New Application\", \"col\": 3}}, {\"id\": \"epasi00023\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"New Repayment\", \"col\": 3}}, {\"id\": \"epasi00024\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"New Expense\", \"col\": 3}}, {\"id\": \"epasi00025\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Loan Application\", \"col\": 3}}, {\"id\": \"epasi00026\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Loan\", \"col\": 3}}, {\"id\": \"epasi00027\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Borrower\", \"col\": 3}}, {\"id\": \"epasi00028\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Collateral\", \"col\": 3}}, {\"id\": \"epasi00029\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Expense\", \"col\": 3}}, {\"id\": \"epasi00030\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Outstanding Loans\", \"col\": 3}}, {\"id\": \"epasi00031\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Profit Summary\", \"col\": 3}}, {\"id\": \"epasi00032\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Daily Operations\", \"col\": 3}}, {\"id\": \"epasi00034\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Sales Agent\", \"col\": 3}}, {\"id\": \"epasi00035\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Commission\", \"col\": 3}}, {\"id\": \"epasi00036\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Commission Summary\", \"col\": 3}}, {\"id\": \"epasi00039\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"User Guide\", \"col\": 3}}]",
  "creation": "2026-11-10 21:00:00.000000",
  "custom_blocks": [
   {
@@ -35,7 +35,7 @@
  "is_hidden": 0,
  "label": "Epasi",
  "links": [],
- "modified": "2026-11-10 22:00:00.000000",
+ "modified": "2026-11-11 20:00:00.000000",
  "modified_by": "Administrator",
  "module": "Epasi",
  "name": "Epasi",
@@ -71,6 +71,18 @@
   {
    "label": "Net Profit This Month",
    "number_card_name": "Net Profit This Month"
+  },
+  {
+   "label": "Unpaid Commissions",
+   "number_card_name": "Unpaid Commissions"
+  },
+  {
+   "label": "Commission Paid This Month",
+   "number_card_name": "Commission Paid This Month"
+  },
+  {
+   "label": "Reviews Awaiting Approval",
+   "number_card_name": "Reviews Awaiting Approval"
   }
  ],
  "owner": "Administrator",
@@ -174,6 +186,29 @@
    "label": "Daily Operations",
    "link_to": "Daily Operations",
    "type": "Report"
+  },
+  {
+   "doc_view": "",
+   "label": "Sales Agent",
+   "link_to": "Sales Agent",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "",
+   "label": "Commission",
+   "link_to": "Commission",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "",
+   "label": "Commission Summary",
+   "link_to": "Commission Summary",
+   "type": "Report"
+  },
+  {
+   "label": "User Guide",
+   "type": "URL",
+   "url": "/epasi/guide"
   }
  ],
  "title": "Epasi",

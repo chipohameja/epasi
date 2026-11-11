@@ -19,3 +19,9 @@ class TestBorrower(IntegrationTestCase):
 		second = Borrower.get_or_create("Test Borrower", "+260971000001")
 		self.assertEqual(first.name, "260971000001")
 		self.assertEqual(first.name, second.name)
+
+	def test_desk_borrower_is_named_with_normalized_number(self):
+		borrower = frappe.get_doc(
+			doctype="Borrower", full_name="Desk Borrower", whatsapp_number="0966000001"
+		).insert()
+		self.assertEqual(borrower.name, "260966000001")

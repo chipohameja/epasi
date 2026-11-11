@@ -292,9 +292,15 @@ scheduler_events = {"daily": ["epasi.epasi.doctype.loan.loan.mark_overdue_loans"
 
 
 fixtures = [
-	{"dt": "Role", "filters": [["name", "=", "Loan Manager"]]},
+	{"dt": "Role", "filters": [["name", "in", ["Loan Manager", "Loan Officer", "Referrer"]]]},
 	{"dt": "Custom HTML Block", "filters": [["name", "=", "Epasi Today"]]},
 ]
+
+_agent_doctypes = ("Borrower", "Loan Application", "Loan", "Commission", "Sales Agent")
+permission_query_conditions = {
+	doctype: "epasi.epasi.agent_access.get_query_condition" for doctype in _agent_doctypes
+}
+has_permission = {doctype: "epasi.epasi.agent_access.has_permission" for doctype in _agent_doctypes}
 
 website_redirects = [{"source": "/", "target": "/epasi", "redirect_http_status": 302}]
 website_route_rules = [{"from_route": "/epasi/<path:app_path>", "to_route": "epasi"}]

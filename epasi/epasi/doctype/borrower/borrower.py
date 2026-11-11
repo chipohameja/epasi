@@ -5,12 +5,19 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import flt
 
+from epasi.epasi.doctype.sales_agent.sales_agent import SalesAgent
+
 ZAMBIA_COUNTRY_CODE = "260"
 
 
 class Borrower(Document):
+	def before_naming(self):
+		self.whatsapp_number = normalize_whatsapp_number(self.whatsapp_number)
+
 	def validate(self):
 		self.whatsapp_number = normalize_whatsapp_number(self.whatsapp_number)
+		if self.is_new() and not self.sales_agent:
+			self.sales_agent = SalesAgent.for_user(agent_type="Loan Officer")
 
 	def update_totals(self):
 		totals = frappe.get_all(

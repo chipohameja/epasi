@@ -2,7 +2,7 @@ import frappe
 from frappe.tests import IntegrationTestCase
 
 from epasi.api.public import get_loan_plans, submit_application
-from epasi.tests.utils import make_photo
+from epasi.tests.utils import make_photo, make_sales_agent
 
 
 def apply(whatsapp_number: str = "0972000001", amount: float = 1000, **details) -> str:
@@ -50,3 +50,15 @@ class TestPublicApi(IntegrationTestCase):
 		self.assertRaises(
 			frappe.ValidationError, submit_application, "Guest Applicant", "0972000004", "2 Weeks", 1000, []
 		)
+
+	def test_referral_code_links_application_and_borrower(self):
+		frappe.set_user("Administrator")
+		agent = make_sales_agent("Mwila Banda").name
+		frappe.set_user("Guest")
+		name = apply(whatsapp_number="0972000004", referral_code="mwila")
+		self.assertEqual(frappe.db.get_value("Loan Application", name, "sales_agent"), agent)
+		self.assertEqual(frappe.db.get_value("Borrower", "260972000004", "sales_agent"), agent)
+
+	def test_unknown_referral_code_is_ignored(self):
+		name = apply(whatsapp_number="0972000005", referral_code="NOBODY")
+		self.assertIsNone(frappe.db.get_value("Loan Application", name, "sales_agent"))

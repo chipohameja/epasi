@@ -2,9 +2,18 @@ from functools import wraps
 
 import frappe
 from frappe import _
-from frappe.utils import add_days, add_months, flt, formatdate, get_first_day, get_first_day_of_week, get_last_day, today
+from frappe.utils import (
+	add_days,
+	add_months,
+	flt,
+	formatdate,
+	get_first_day,
+	get_first_day_of_week,
+	get_last_day,
+	today,
+)
 
-from epasi.epasi.money import COLLECTED, LENT, MoneySummary
+from epasi.epasi.money import COLLECTED, COMMISSION_PAID, LENT, MoneySummary
 from epasi.epasi.report.daily_operations.daily_operations import ACTIVITIES
 
 MANAGER_ROLES = ("Loan Manager", "System Manager")
@@ -26,7 +35,12 @@ def manager_only(method):
 
 
 def card(value, doctype: str, fieldtype: str = "Int", **route_options) -> dict:
-	return {"value": value, "fieldtype": fieldtype, "route": ["List", doctype], "route_options": route_options}
+	return {
+		"value": value,
+		"fieldtype": fieldtype,
+		"route": ["List", doctype],
+		"route_options": route_options,
+	}
 
 
 def count(doctype: str, filters: dict) -> int:
@@ -34,7 +48,9 @@ def count(doctype: str, filters: dict) -> int:
 
 
 def total_outstanding(filters: dict) -> float:
-	rows = frappe.get_all("Loan", filters={"docstatus": 1, **filters}, fields=[{"SUM": "outstanding", "as": "total"}])
+	rows = frappe.get_all(
+		"Loan", filters={"docstatus": 1, **filters}, fields=[{"SUM": "outstanding", "as": "total"}]
+	)
 	return flt(rows[0].total)
 
 
@@ -45,6 +61,11 @@ def this_month() -> MoneySummary:
 @manager_only
 def get_pending_applications(filters=None) -> dict:
 	return card(count("Loan Application", {"status": "Pending"}), "Loan Application", status="Pending")
+
+
+@manager_only
+def get_reviews_awaiting_approval(filters=None) -> dict:
+	return card(count("Review", {"is_published": 0}), "Review", is_published=0)
 
 
 @manager_only
@@ -82,6 +103,20 @@ def get_collected_this_month(filters=None) -> dict:
 @manager_only
 def get_net_profit_this_month(filters=None) -> dict:
 	return card(this_month().net_profit, "Expense", "Currency")
+
+
+@manager_only
+def get_unpaid_commissions(filters=None) -> dict:
+	rows = frappe.get_all(
+		"Commission", filters={"status": "Unpaid"}, fields=[{"SUM": "amount", "as": "total"}]
+	)
+	return card(flt(rows[0].total), "Commission", "Currency", status="Unpaid")
+
+
+@manager_only
+def get_commission_paid_this_month(filters=None) -> dict:
+	value = COMMISSION_PAID.total(get_first_day(today()), today())
+	return card(value, "Commission", "Currency", status="Paid")
 
 
 @manager_only
@@ -125,7 +160,10 @@ def get_net_profit_by_month(months: int = 6) -> dict:
 def get_outstanding_by_status() -> dict:
 	statuses = UNPAID_STATUSES
 	values = [total_outstanding({"status": status}) for status in statuses]
-	return {"labels": [_(status) for status in statuses], "datasets": [{"name": _("Outstanding"), "values": values}]}
+	return {
+		"labels": [_(status) for status in statuses],
+		"datasets": [{"name": _("Outstanding"), "values": values}],
+	}
 
 
 def get_loans_by_plan() -> dict:
@@ -148,7 +186,12 @@ def get_today_summary() -> dict:
 
 def get_today_section(activity) -> dict:
 	rows = activity.get_rows(today())
-	return {"label": _(activity.label), "count": len(rows), "total": sum(row["amount"] for row in rows), "rows": rows}
+	return {
+		"label": _(activity.label),
+		"count": len(rows),
+		"total": sum(row["amount"] for row in rows),
+		"rows": rows,
+	}
 
 
 def get_month_comparison() -> dict:

@@ -1,7 +1,9 @@
 <template>
   <div class="rounded-6 border border-gold-dark bg-night p-4" aria-live="polite">
     <p class="eyebrow">You will repay</p>
-    <p class="mt-1 font-serif text-6xl font-bold text-gold-light">{{ formatMoney(repayment.total) }}</p>
+    <p class="mt-1 font-serif text-6xl font-bold text-gold-light">
+      {{ formatMoney(repayment.total) }}
+    </p>
     <p class="mt-1 text-base text-ink-gray-7">
       by <strong class="text-ink-gray-9">{{ repayment.dueDate }}</strong>
     </p>

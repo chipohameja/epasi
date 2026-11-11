@@ -67,6 +67,7 @@ import { ErrorMessage, FormControl, useCall } from 'frappe-ui'
 import PhotoPicker from '@/components/PhotoPicker.vue'
 import RepaymentPreview from '@/components/RepaymentPreview.vue'
 import { formatMoney, useLoanPlans } from '@/data/plans'
+import { getReferral } from '@/utils/referral'
 
 const router = useRouter()
 const purposes = ['Personal', 'Business', 'Asset Financing', 'Education']
@@ -97,14 +98,16 @@ const planOptions = computed(() =>
   (plans.data || []).map((plan) => ({
     label: `${plan.name} at ${plan.interest_rate}%`,
     value: plan.name,
-  })),
+  }))
 )
 
 const selectedPlan = computed(() => (plans.data || []).find((plan) => plan.name === form.loan_plan))
 
 const amountHint = computed(() => {
   const plan = selectedPlan.value
-  return plan ? `Between ${formatMoney(plan.minimum_amount)} and ${formatMoney(plan.maximum_amount)}` : ''
+  return plan
+    ? `Between ${formatMoney(plan.minimum_amount)} and ${formatMoney(plan.maximum_amount)}`
+    : ''
 })
 
 const showPreview = computed(() => {
@@ -114,11 +117,11 @@ const showPreview = computed(() => {
 })
 
 const errorMessage = computed(
-  () => formError.value || application.error?.message?.replace(/^\w+Error: /, ''),
+  () => formError.value || application.error?.message?.replace(/^\w+Error: /, '')
 )
 
 function submit() {
   formError.value = form.photos.length ? '' : 'Add at least one photo of your collateral.'
-  if (!formError.value) application.submit({ ...form })
+  if (!formError.value) application.submit({ ...form, referral_code: getReferral() })
 }
 </script>

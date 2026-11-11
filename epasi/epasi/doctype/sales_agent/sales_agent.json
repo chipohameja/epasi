@@ -1,0 +1,203 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "autoname": "format:AGT-{#####}",
+ "creation": "2026-11-11 15:24:50.399311",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_agent",
+  "full_name",
+  "agent_type",
+  "column_break_agent",
+  "whatsapp_number",
+  "user",
+  "is_active",
+  "section_break_commission",
+  "commission_rate",
+  "column_break_commission",
+  "minimum_principal",
+  "section_break_referral",
+  "referral_code",
+  "column_break_referral",
+  "referral_link",
+  "section_break_totals",
+  "commission_earned",
+  "column_break_totals",
+  "commission_paid",
+  "commission_unpaid"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_agent",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Full Name",
+   "reqd": 1
+  },
+  {
+   "default": "Referrer",
+   "fieldname": "agent_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Agent Type",
+   "options": "Referrer\nLoan Officer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_agent",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "whatsapp_number",
+   "fieldtype": "Data",
+   "label": "WhatsApp Number",
+   "options": "Phone"
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "label": "User",
+   "options": "User",
+   "description": "Lets this agent sign in to see their referrals."
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Active"
+  },
+  {
+   "description": "Commission is a share of the interest paid on a loan, earned when the loan is fully repaid.",
+   "fieldname": "section_break_commission",
+   "fieldtype": "Section Break",
+   "label": "Commission"
+  },
+  {
+   "fieldname": "commission_rate",
+   "fieldtype": "Percent",
+   "in_list_view": 1,
+   "label": "Commission Rate",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_commission",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Loans must be more than this amount to earn commission.",
+   "fieldname": "minimum_principal",
+   "fieldtype": "Currency",
+   "label": "Minimum Principal"
+  },
+  {
+   "fieldname": "section_break_referral",
+   "fieldtype": "Section Break",
+   "label": "Referral"
+  },
+  {
+   "description": "Made from the first name when left empty.",
+   "fieldname": "referral_code",
+   "fieldtype": "Data",
+   "label": "Referral Code",
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_referral",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "referral_link",
+   "fieldtype": "Data",
+   "label": "Referral Link",
+   "options": "URL",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_totals",
+   "fieldtype": "Section Break",
+   "label": "Commission Totals"
+  },
+  {
+   "fieldname": "commission_earned",
+   "fieldtype": "Currency",
+   "label": "Earned",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "column_break_totals",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "commission_paid",
+   "fieldtype": "Currency",
+   "label": "Paid",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "commission_unpaid",
+   "fieldtype": "Currency",
+   "label": "Unpaid",
+   "read_only": 1,
+   "no_copy": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-11-11 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Epasi",
+ "name": "Sales Agent",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Loan Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "role": "Loan Officer",
+   "read": 1,
+   "print": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "search_fields": "agent_type,referral_code",
+ "show_title_field_in_link": 1,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "full_name"
+}

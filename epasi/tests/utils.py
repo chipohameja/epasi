@@ -35,7 +35,9 @@ def make_application(loan_plan: str = "2 Weeks", amount: float = 1000, status: s
 	return application.name
 
 
-def make_loan(loan_plan: str = "2 Weeks", principal: float = 1000, disbursement_date: str | None = None, **fields):
+def make_loan(
+	loan_plan: str = "2 Weeks", principal: float = 1000, disbursement_date: str | None = None, **fields
+):
 	return frappe.get_doc(
 		doctype="Loan",
 		loan_plan=loan_plan,
@@ -63,3 +65,25 @@ def make_expense(amount: float, expense_date: str | None = None, category: str =
 	return frappe.get_doc(
 		doctype="Expense", amount=amount, expense_date=expense_date or today(), category=category
 	).insert()
+
+
+def make_sales_agent(
+	full_name: str = "Mwila Banda", commission_rate: float = 15, minimum_principal: float = 10000, **fields
+):
+	return frappe.get_doc(
+		doctype="Sales Agent",
+		full_name=full_name,
+		commission_rate=commission_rate,
+		minimum_principal=minimum_principal,
+		**fields,
+	).insert()
+
+
+def make_user(email: str, first_name: str = "Test") -> str:
+	if not frappe.db.exists("User", email):
+		frappe.get_doc(doctype="User", email=email, first_name=first_name, send_welcome_email=0).insert()
+	return email
+
+
+def make_agent_with_user(email: str, agent_type: str = "Loan Officer", full_name: str = "Mwila Banda"):
+	return make_sales_agent(full_name, agent_type=agent_type, user=make_user(email))
