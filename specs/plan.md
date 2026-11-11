@@ -245,7 +245,7 @@ Each phase cuts through every layer (DocType, controller, API, UI, tests) and en
 ### Phase 9: Test data
 
 - `Epasi Settings` (single, System Manager only) with **Generate Test Data** and **Clear Test Data** buttons.
-- The test data is a snapshot of borrowers, applications, loans, repayments, collateral, expenses and their photos, kept in `epasi/setup/test_data/` (`records.json` and `files/`).
+- The test data is a snapshot of borrowers, applications, loans, repayments, collateral, expenses, sales agents, commissions, agent users and photos, kept in `epasi/setup/test_data/` (`records.json` and `files/`).
 - Generate inserts the records with their original names, values and status. It refuses if any of them already exist, and moves the naming counter past the highest test number so new records do not reuse a test name.
 - Clear deletes only the records named in the snapshot, with their photos. Other records are kept.
 - To refresh the snapshot from a site: `bench --site <site> execute epasi.setup.test_data.export`.

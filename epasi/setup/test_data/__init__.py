@@ -5,8 +5,19 @@ import shutil
 import frappe
 from frappe import _
 from frappe.model.naming import NamingSeries
+from frappe.utils.password import update_password
 
-DOCTYPES = ("Borrower", "Loan Application", "Loan", "Loan Repayment", "Collateral", "Expense")
+DOCTYPES = (
+	"Borrower",
+	"Loan Application",
+	"Loan",
+	"Loan Repayment",
+	"Collateral",
+	"Expense",
+	"Sales Agent",
+	"Commission",
+)
+USER_PASSWORD = "Epasi@2026test"
 FOLDER = os.path.dirname(__file__)
 RECORDS_PATH = os.path.join(FOLDER, "records.json")
 FILES_FOLDER = os.path.join(FOLDER, "files")
@@ -39,8 +50,12 @@ class TestData:
 	def insert(self, record: dict):
 		document = frappe.get_doc(record)
 		document.db_insert()
+		for child in document.get_all_children():
+			child.db_insert()
 		if document.doctype == "File":
 			self.copy_photo(document)
+		elif document.doctype == "User":
+			update_password(document.name, USER_PASSWORD)
 		elif document.meta.autoname.startswith("format:"):
 			self.update_series(document)
 
@@ -66,7 +81,9 @@ class TestData:
 
 def export():
 	"""Saves the site's current Epasi records as the test data. Run with bench execute."""
-	records = [get_record(doctype, name) for doctype in DOCTYPES for name in get_names(doctype)]
+	users = frappe.get_all("Sales Agent", filters={"user": ["is", "set"]}, pluck="user")
+	records = [get_record("User", user) for user in users]
+	records += [get_record(doctype, name) for doctype in DOCTYPES for name in get_names(doctype)]
 	os.makedirs(FILES_FOLDER, exist_ok=True)
 	for name in frappe.get_all("File", filters={"attached_to_doctype": ["in", DOCTYPES]}, pluck="name"):
 		records.append(get_record("File", name))

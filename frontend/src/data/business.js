@@ -11,7 +11,6 @@ export const services = [
 
 export const contacts = [
   { name: 'Pasi', role: 'Founder & CEO', whatsapp: '260972616440', phone: '+260 972 616 440' },
-  { name: 'Muluti', whatsapp: '260717374941', phone: '+260 717 374 941' },
 ]
 
 export const email = 'Epasi002@gmail.com'

@@ -40,6 +40,7 @@ COLLECTED = Ledger("Loan Repayment", "amount", "payment_date", {"docstatus": 1})
 INTEREST = Ledger("Loan Repayment", "interest_portion", "payment_date", {"docstatus": 1})
 RECOVERY = Ledger("Collateral", "sale_amount", "sale_date", {"status": "Sold"})
 EXPENSES = Ledger("Expense", "amount", "expense_date")
+COMMISSION_PAID = Ledger("Commission", "amount", "paid_date", {"status": "Paid"})
 
 
 class MoneySummary:

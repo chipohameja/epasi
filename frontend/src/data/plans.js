@@ -1,6 +1,10 @@
 import { useCall } from 'frappe-ui'
 
-const kwacha = new Intl.NumberFormat('en-ZM', { style: 'currency', currency: 'ZMW', trailingZeroDisplay: 'stripIfInteger' })
+const kwacha = new Intl.NumberFormat('en-ZM', {
+  style: 'currency',
+  currency: 'ZMW',
+  trailingZeroDisplay: 'stripIfInteger',
+})
 const longDate = new Intl.DateTimeFormat('en-GB', {
   weekday: 'short',
   day: 'numeric',

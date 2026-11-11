@@ -8,7 +8,9 @@ epasi.add_whatsapp_button = function (frm) {
 };
 
 epasi.render_photos = function (frm) {
-	const photos = frm.get_docinfo().attachments.filter((file) => frappe.utils.is_image_file(file.file_url));
+	const photos = frm
+		.get_docinfo()
+		.attachments.filter((file) => frappe.utils.is_image_file(file.file_url));
 	const thumbnails = photos.map(
 		(file) => `<a href="${file.file_url}" target="_blank">
 			<img src="${file.file_url}" style="height: 120px; border-radius: 8px; object-fit: cover;">

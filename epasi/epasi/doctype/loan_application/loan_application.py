@@ -2,10 +2,24 @@ import frappe
 from frappe import _
 from frappe.model.document import Document
 
+from epasi.epasi.doctype.sales_agent.sales_agent import SalesAgent
+
 
 class LoanApplication(Document):
 	def validate(self):
+		if self.is_new():
+			self.set_sales_agent()
 		frappe.get_doc("Loan Plan", self.loan_plan).validate_amount(self.amount)
+
+	def on_update(self):
+		if self.sales_agent and not frappe.db.get_value("Borrower", self.borrower, "sales_agent"):
+			frappe.db.set_value("Borrower", self.borrower, "sales_agent", self.sales_agent)
+
+	def set_sales_agent(self):
+		borrower_agent = frappe.db.get_value("Borrower", self.borrower, "sales_agent")
+		self.sales_agent = (
+			borrower_agent or self.sales_agent or SalesAgent.for_user(agent_type="Loan Officer")
+		)
 
 	@frappe.whitelist()
 	def create_loan(self) -> str:
@@ -20,5 +34,6 @@ class LoanApplication(Document):
 			loan_application=self.name,
 			loan_plan=self.loan_plan,
 			principal=self.amount,
+			sales_agent=self.sales_agent,
 		)
 		return loan.insert().name

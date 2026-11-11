@@ -1,10 +1,8 @@
 {
  "actions": [],
  "autoname": "format:LOAN-{#####}",
- "creation": "2026-11-10 16:00:00.000000",
- "custom": 0,
+ "creation": "2026-11-10 16:00:00",
  "doctype": "DocType",
- "editable_grid": 0,
  "engine": "InnoDB",
  "field_order": [
   "section_break_borrower",
@@ -29,6 +27,11 @@
   "principal_paid",
   "column_break_tracking",
   "outstanding",
+  "section_break_commission",
+  "sales_agent",
+  "column_break_commission",
+  "commission_rate",
+  "minimum_principal",
   "amended_from"
  ],
  "fields": [
@@ -184,6 +187,35 @@
    "read_only": 1
   },
   {
+   "collapsible": 1,
+   "fieldname": "section_break_commission",
+   "fieldtype": "Section Break",
+   "label": "Commission"
+  },
+  {
+   "fieldname": "sales_agent",
+   "fieldtype": "Link",
+   "label": "Sales Agent",
+   "options": "Sales Agent",
+   "read_only_depends_on": "eval:doc.docstatus>0"
+  },
+  {
+   "fieldname": "column_break_commission",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "commission_rate",
+   "fieldtype": "Percent",
+   "label": "Commission Rate",
+   "read_only": 1
+  },
+  {
+   "fieldname": "minimum_principal",
+   "fieldtype": "Currency",
+   "label": "Minimum Principal",
+   "read_only": 1
+  },
+  {
    "fieldname": "amended_from",
    "fieldtype": "Link",
    "label": "Amended From",
@@ -194,7 +226,6 @@
   }
  ],
  "is_submittable": 1,
- "istable": 0,
  "links": [
   {
    "link_doctype": "Collateral",
@@ -205,11 +236,11 @@
    "link_fieldname": "loan"
   }
  ],
- "modified": "2026-11-10 18:00:00.000000",
+ "modified": "2026-11-11 10:00:00.000000",
  "modified_by": "Administrator",
  "module": "Epasi",
  "name": "Loan",
- "naming_rule": "Expression",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -241,8 +272,15 @@
    "share": 1,
    "submit": 1,
    "write": 1
+  },
+  {
+   "role": "Loan Officer",
+   "read": 1,
+   "report": 1,
+   "print": 1
   }
  ],
+ "row_format": "Dynamic",
  "show_title_field_in_link": 1,
  "sort_field": "creation",
  "sort_order": "DESC",

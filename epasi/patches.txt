@@ -5,3 +5,4 @@
 [post_model_sync]
 # Patches added in this section will be executed after doctypes are migrated
 epasi.patches.v0_1.seed_loan_plans
+epasi.patches.v0_1.set_commission_earned_date
