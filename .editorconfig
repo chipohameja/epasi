@@ -19,3 +19,8 @@ max_line_length = 99
 insert_final_newline = false
 indent_style = space
 indent_size = 1
+
+# Vue SPA: 2 spaces, matches frontend/.prettierrc.json
+[frontend/**.{js,vue,css}]
+indent_style = space
+indent_size = 2
