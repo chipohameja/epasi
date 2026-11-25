@@ -13,7 +13,7 @@ export const contacts = [
   { name: 'Pasi', role: 'Founder & CEO', whatsapp: '260972616440', phone: '+260 972 616 440' },
 ]
 
-export const email = 'Epasi002@gmail.com'
+export const email = 'epasimoneysolutions@gmail.com'
 export const town = 'Mazabuka, Zambia'
 
 export function whatsappLink(number, message = '') {
