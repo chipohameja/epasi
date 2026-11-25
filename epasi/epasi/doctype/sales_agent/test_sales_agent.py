@@ -1,6 +1,8 @@
+from unittest.mock import patch
+
 from frappe.tests import IntegrationTestCase
 
-from epasi.epasi.doctype.sales_agent.sales_agent import SalesAgent
+from epasi.epasi.doctype.sales_agent.sales_agent import SalesAgent, make_referral_link
 from epasi.tests.utils import make_sales_agent
 
 
@@ -21,3 +23,14 @@ class TestSalesAgent(IntegrationTestCase):
 		self.assertEqual(SalesAgent.find_by_code("chanda"), active.name)
 		self.assertIsNone(SalesAgent.find_by_code("BUPE"))
 		self.assertFalse(SalesAgent.find_by_code(None))
+
+	def test_referral_link_drops_default_port(self):
+		for url in ("https://epasi.example:80", "http://epasi.example:443"):
+			with patch("epasi.epasi.doctype.sales_agent.sales_agent.get_url", return_value=url + "/x"):
+				self.assertEqual(make_referral_link("MWILA"), url.rsplit(":", 1)[0] + "/x")
+
+	def test_referral_link_keeps_custom_port(self):
+		with patch(
+			"epasi.epasi.doctype.sales_agent.sales_agent.get_url", return_value="http://epasi.site:8000/x"
+		):
+			self.assertEqual(make_referral_link("MWILA"), "http://epasi.site:8000/x")

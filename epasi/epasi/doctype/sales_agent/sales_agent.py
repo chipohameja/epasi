@@ -1,17 +1,19 @@
 import re
+from urllib.parse import urlsplit, urlunsplit
 
 import frappe
 from frappe.model.document import Document
 from frappe.utils import flt, get_url
 
 REFERRAL_PATH = "/epasi/apply?ref="
+DEFAULT_PORTS = {80, 443}
 AGENT_ROLES = {"Loan Officer": "Loan Officer", "Referrer": "Referrer"}
 
 
 class SalesAgent(Document):
 	def validate(self):
 		self.referral_code = clean_code(self.referral_code) or self.make_referral_code()
-		self.referral_link = get_url(REFERRAL_PATH + self.referral_code)
+		self.referral_link = make_referral_link(self.referral_code)
 
 	def on_update(self):
 		if self.has_value_changed("user") or self.has_value_changed("agent_type"):
@@ -60,6 +62,13 @@ def get_commission_totals(sales_agent: str) -> dict:
 		group_by="status",
 	)
 	return {"Paid": 0, "Unpaid": 0} | {row.status: flt(row.total) for row in rows}
+
+
+def make_referral_link(code: str) -> str:
+	url = urlsplit(get_url(REFERRAL_PATH + code))
+	if url.port in DEFAULT_PORTS:
+		url = url._replace(netloc=url.hostname)
+	return urlunsplit(url)
 
 
 def clean_code(code: str | None) -> str:
