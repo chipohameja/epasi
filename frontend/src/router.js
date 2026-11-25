@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { findGuide } from '@/data/guides'
 import { saveReferral } from '@/utils/referral'
 import { isLoggedIn, loginUrl } from '@/utils/session'
 
@@ -17,14 +16,6 @@ const routes = [
     name: 'Partner',
     component: () => import('@/pages/Partner.vue'),
     meta: { requiresLogin: true },
-  },
-  { path: '/guide', name: 'Guides', component: () => import('@/pages/Guides.vue') },
-  {
-    path: '/guide/:slug',
-    name: 'Guide',
-    component: () => import('@/pages/Guide.vue'),
-    props: true,
-    beforeEnter: (to) => (findGuide(to.params.slug) ? true : { name: 'Guides' }),
   },
   { path: '/:pathMatch(.*)*', redirect: '/' },
 ]

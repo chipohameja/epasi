@@ -5,24 +5,6 @@
         <p class="font-serif text-3xl italic text-gold-light">“{{ tagline }}”</p>
         <p class="mt-1 text-base text-ink-gray-6">{{ taglineMeaning }}</p>
         <p class="eyebrow mt-6">We lend · You grow · We succeed together</p>
-        <a
-          :href="managerLoginUrl"
-          class="mt-6 inline-block text-base text-ink-gray-6 underline-offset-4 hover:underline"
-        >
-          Loan manager login
-        </a>
-        <RouterLink
-          :to="{ name: 'Partner' }"
-          class="ml-4 inline-block text-base text-ink-gray-6 underline-offset-4 hover:underline"
-        >
-          Partner login
-        </RouterLink>
-        <RouterLink
-          :to="{ name: 'Guides' }"
-          class="ml-4 inline-block text-base text-ink-gray-6 underline-offset-4 hover:underline"
-        >
-          User guide
-        </RouterLink>
       </div>
       <div id="contact">
         <p class="eyebrow">Contact</p>
@@ -51,13 +33,5 @@
 </template>
 
 <script setup>
-import {
-  contacts,
-  email,
-  managerLoginUrl,
-  tagline,
-  taglineMeaning,
-  town,
-  whatsappLink,
-} from '@/data/business'
+import { contacts, email, tagline, taglineMeaning, town, whatsappLink } from '@/data/business'
 </script>

@@ -14,8 +14,8 @@ Both earn commission on loans from the borrowers they bring in, when those loans
 | Topic | Decision |
 | --- | --- |
 | Who | One `Sales Agent` DocType with a type: `Loan Officer` or `Referrer`. Only the Loan Manager adds them. |
-| Rate | Set on each sales agent: `commission_rate` (%) and `minimum_principal` (ZMW). Example: 15% above K10,000. |
-| Base | Commission = rate × interest paid on the loan. Nothing if the principal is not more than the minimum. |
+| Rate | Set on each sales agent: `commission_rate` (%) and `minimum_principal` (ZMW). Example: 15% once the agent's loans add up to K10,000. |
+| Base | Commission = rate × interest paid on the loan. Nothing until the total principal of all the agent's submitted loans is at least the minimum. Then every repaid loan earns, also the loans that closed before the total got there. |
 | When earned | When the loan is Closed (fully repaid). A defaulted loan earns nothing. |
 | Rate snapshot | The loan copies the agent, rate and minimum when it is submitted. Later changes to the agent do not affect it. |
 | One agent | An application has at most one sales agent. |
@@ -62,13 +62,17 @@ Named `COM-{#####}`. Created by the system only.
 
 **Referral visit.** The SPA reads `?ref=` on any page and saves it with a 30-day expiry. `submit_application` gets `referral_code`. The server finds the active agent with that code. If the borrower has no agent, it links the borrower to that agent. The application takes the borrower's agent.
 
-**Loan closes.** `Loan.update_paid_amounts` sets status Closed. If the loan has an agent and its principal is more than the minimum, create a Commission for rate × interest paid.
+**Loan closes.** `Loan.update_paid_amounts` sets status Closed. If the loan has an agent and the agent's total principal is at least the minimum, create a Commission for rate × interest paid.
+
+**Loan is submitted or cancelled.** `Commission.sync_for_agent` checks every closed loan of the agent again. It adds the commissions that the new total allows and deletes unpaid ones that it no longer allows.
+
+**Old loans.** Loans that closed before this rule have `closed_without_commission` set by a patch. They count toward the total but never earn.
 
 **Mark Paid.** A button on an Unpaid commission, for the Loan Manager. It creates an Expense (today, `Commission`, amount, description with agent and loan) and sets the commission to Paid. Each change to a commission updates the agent totals.
 
 **Walk-in.** A borrower or application that a loan officer creates in Desk takes the officer's agent. The application status and the `sales_agent` fields are permission level 1, so an officer cannot change them.
 
-**Partner page.** `/epasi/partner` sends a visitor who is not signed in to `/login`. After sign-in it calls `epasi.api.partner.get_partner_summary`. The footer has a **Partner login** link.
+**Partner page.** `/epasi/partner` sends a visitor who is not signed in to `/login`. After sign-in it calls `epasi.api.partner.get_partner_summary`. The website has no link to it. Referrers open the address directly, as the referrer guide says.
 
 ## Phases (tracer bullets)
 
@@ -80,7 +84,7 @@ The thinnest slice through every layer: a manager adds a referrer, a visitor app
 - `?ref=` saved in the browser and sent with the application.
 - `sales_agent` on Borrower, Loan Application and Loan. Borrower lock.
 - `Commission` created when the loan closes. Removed if the loan reopens while Unpaid.
-- Tests: code generation, attribution and borrower lock, commission above and below the minimum, defaulted loan, reopened loan.
+- Tests: code generation, attribution and borrower lock, commission below and at the minimum, small loans that reach the minimum together, cancel below the minimum, old closed loans, defaulted loan, reopened loan.
 - E2E: open the referral link, apply, issue and repay the loan in Desk, see the commission.
 
 ### Phase 11: Pay commissions

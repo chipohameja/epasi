@@ -8,12 +8,12 @@ Each type of user has one guide page with steps, screenshots and examples in sim
 
 | Topic | Decision |
 | --- | --- |
-| Place | Public pages in the website: `/epasi/guide` lists the guides, `/epasi/guide/<slug>` shows one. |
+| Place | Desk page `user-guide` (a Frappe UI page). `/desk/user-guide` lists the guides, `/desk/user-guide/<slug>` shows one. Only System Manager can open it. |
 | Guides | Applicant, Referrer, Loan Officer, Loan Manager, Administrator. |
-| Content | One data file for each guide in `frontend/src/data/guides/`. Each section has text, steps, a screenshot, an example and a tip, all optional. |
+| Content | One data file for each guide in `epasi/epasi/page/user_guide/guides/`. Each section has text, steps, a screenshot, an example and a tip, all optional. |
 | Screenshots | `epasi/public/images/guide/`, served from `/assets/epasi/images/guide/`. Website pages at phone size, Desk pages at 1280 × 800. |
-| Links | "User guide" in the website footer. "User Guide" shortcut in the Epasi workspace. |
-| Secrets | No passwords in the guides. The pages are public. |
+| Links | "User Guide" shortcut in the Epasi workspace. Desk shows it only to users who can open the page. The website has no link. |
+| Secrets | No passwords in the guides. The page is for admins, but its script and screenshots are public static files. |
 
 ## Refresh the screenshots
 
