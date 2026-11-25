@@ -29,9 +29,11 @@ class Loan(Document):
 		if self.loan_application:
 			Collateral.create_from_loan(self)
 		self.update_borrower_totals()
+		Commission.sync_for_agent(self.sales_agent)
 
 	def on_cancel(self):
 		self.update_borrower_totals()
+		Commission.sync_for_agent(self.sales_agent)
 
 	def copy_plan_terms(self):
 		self.interest_rate, self.term_days = frappe.db.get_value(

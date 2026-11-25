@@ -32,6 +32,7 @@
   "column_break_commission",
   "commission_rate",
   "minimum_principal",
+  "closed_without_commission",
   "amended_from"
  ],
  "fields": [
@@ -216,6 +217,14 @@
    "read_only": 1
   },
   {
+   "default": "0",
+   "description": "Closed before commission used the agent's total principal. Never earns commission.",
+   "fieldname": "closed_without_commission",
+   "fieldtype": "Check",
+   "label": "Closed Without Commission",
+   "read_only": 1
+  },
+  {
    "fieldname": "amended_from",
    "fieldtype": "Link",
    "label": "Amended From",
@@ -236,7 +245,7 @@
    "link_fieldname": "loan"
   }
  ],
- "modified": "2026-11-11 10:00:00.000000",
+ "modified": "2026-11-25 10:00:00.000000",
  "modified_by": "Administrator",
  "module": "Epasi",
  "name": "Loan",
