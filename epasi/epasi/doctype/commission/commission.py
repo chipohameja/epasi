@@ -39,11 +39,20 @@ class Commission(Document):
 		return expense.insert().name
 
 	@staticmethod
+	def sync_for_agent(sales_agent: str | None):
+		if not sales_agent:
+			return
+		filters = {"sales_agent": sales_agent, "docstatus": 1, "status": "Closed"}
+		for loan in frappe.get_all("Loan", filters=filters, pluck="name"):
+			Commission.sync_for_loan(frappe.get_doc("Loan", loan))
+
+	@staticmethod
 	def sync_for_loan(loan: Document):
 		existing = frappe.db.get_value("Commission", {"loan": loan.name}, ["name", "status"], as_dict=True)
-		if loan.status == "Closed" and not existing and earns_commission(loan):
+		earns = loan.status == "Closed" and earns_commission(loan)
+		if earns and not existing:
 			Commission.create_for_loan(loan)
-		elif loan.status != "Closed" and existing and existing.status == "Unpaid":
+		elif not earns and existing and existing.status == "Unpaid":
 			frappe.delete_doc("Commission", existing.name, ignore_permissions=True)
 
 	@staticmethod
@@ -61,6 +70,12 @@ class Commission(Document):
 
 
 def earns_commission(loan: Document) -> bool:
-	if not loan.sales_agent or flt(loan.commission_rate) <= 0:
+	if not loan.sales_agent or flt(loan.commission_rate) <= 0 or loan.closed_without_commission:
 		return False
-	return flt(loan.principal) > flt(loan.minimum_principal)
+	return get_agent_principal(loan.sales_agent) >= flt(loan.minimum_principal)
+
+
+def get_agent_principal(sales_agent: str) -> float:
+	filters = {"sales_agent": sales_agent, "docstatus": 1}
+	rows = frappe.get_all("Loan", filters=filters, fields=[{"SUM": "principal", "as": "total"}])
+	return flt(rows[0].total)

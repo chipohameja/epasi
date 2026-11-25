@@ -15,7 +15,6 @@ export const contacts = [
 
 export const email = 'Epasi002@gmail.com'
 export const town = 'Mazabuka, Zambia'
-export const managerLoginUrl = '/login?redirect-to=/desk/epasi'
 
 export function whatsappLink(number, message = '') {
   return `https://wa.me/${number}${message ? `?text=${encodeURIComponent(message)}` : ''}`

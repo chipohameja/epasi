@@ -27,9 +27,36 @@ class TestCommission(IntegrationTestCase):
 		repay_in_full(loan)
 		self.assertEqual(get_commission(loan), {"amount": 720, "status": "Unpaid"})
 
-	def test_loan_not_above_minimum_earns_nothing(self):
+	def test_agent_below_minimum_earns_nothing(self):
+		loan = make_agent_loan(5000)
+		repay_in_full(loan)
+		self.assertIsNone(get_commission(loan))
+
+	def test_agent_total_at_minimum_earns(self):
 		loan = make_agent_loan(10000)
 		repay_in_full(loan)
+		self.assertEqual(get_commission(loan).status, "Unpaid")
+
+	def test_small_loans_earn_once_agent_total_reaches_minimum(self):
+		first = make_agent_loan(5000)
+		repay_in_full(first)
+		second = make_agent_loan(7000, sales_agent=first.sales_agent)
+		self.assertEqual(get_commission(first).amount, 300)
+		repay_in_full(second)
+		self.assertEqual(get_commission(second).amount, 420)
+
+	def test_commission_is_removed_when_cancel_drops_total_below_minimum(self):
+		first = make_agent_loan(5000)
+		second = make_agent_loan(7000, sales_agent=first.sales_agent)
+		repay_in_full(first)
+		second.reload().cancel()
+		self.assertIsNone(get_commission(first))
+
+	def test_loan_closed_before_rule_change_never_earns(self):
+		loan = make_agent_loan(5000)
+		repay_in_full(loan)
+		loan.db_set("closed_without_commission", 1)
+		make_agent_loan(7000, sales_agent=loan.sales_agent)
 		self.assertIsNone(get_commission(loan))
 
 	def test_defaulted_loan_earns_nothing(self):

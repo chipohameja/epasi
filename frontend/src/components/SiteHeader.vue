@@ -11,12 +11,6 @@
         </span>
       </RouterLink>
       <div class="flex items-center gap-3 whitespace-nowrap">
-        <a
-          :href="managerLoginUrl"
-          class="text-xs text-ink-gray-6 underline-offset-4 hover:underline sm:text-sm"
-        >
-          Manager login
-        </a>
         <RouterLink
           v-if="route.name !== 'Apply'"
           :to="{ name: 'Apply' }"
@@ -32,7 +26,6 @@
 <script setup>
 import iconUrl from '@images/epasi-icon.png'
 import { useRoute } from 'vue-router'
-import { managerLoginUrl } from '@/data/business'
 
 const route = useRoute()
 </script>
